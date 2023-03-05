@@ -1,0 +1,30 @@
+bases:
+ - bases/defaults.yaml
+
+environments:
+  {{ .Environment.Name }}:
+    missingFileHandler: Error  # "Error" instructs helmfile to fail when unable to find a values or secrets file. When "Warn", it prints the file and continues.
+    values:
+      - values/environment.yaml
+      - "{{ .Environment.Name }}/environment.yaml"
+    secrets:
+      - "{{ .Environment.Name }}/secrets.yaml"
+
+templates:
+  tmpl: &tmpl
+    namespace: ipapp
+    values:
+      - "values/{{`{{ .Release.Name }}`}}.yaml.gotmpl"
+
+releases:
+  - << : *tmpl
+    name: postgre-db
+    chart: bitnami/postgresql
+    version: 12.2.1
+
+  - << : *tmpl
+    name: ipapp
+    chart: ../../helm-chart/ipapp-1.0.0.tgz
+    version: 1.0.0
+    values:
+      - "values/{{`{{ .Release.Name }}`}}.yaml.gotmpl"

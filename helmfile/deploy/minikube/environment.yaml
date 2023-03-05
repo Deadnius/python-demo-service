@@ -1,0 +1,11 @@
+image:
+  tag: 1.0.3
+    
+replicaCount: 1
+
+ingress:
+  enable: true
+  hostUrl: ipapp.ru
+
+#Генерация таблицы ip_test c 2 атрибутами
+tablecreate: 'CREATE TABLE IF NOT exists postgres.public."ip_test" (ip text, time time);'

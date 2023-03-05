@@ -1,0 +1,12 @@
+container:
+  image:
+    repostitory: deadanius/ip-app
+    tag: 1.0.3
+
+replicaCount: 1
+
+serviceType: ClusterIP
+
+ingress:
+  enable: true
+  hostUrl: ipapp.ru

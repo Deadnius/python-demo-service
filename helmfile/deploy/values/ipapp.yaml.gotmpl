@@ -1,0 +1,12 @@
+container:
+  image:
+    repostitory: {{ .Values.image.repostitory }}
+    tag: {{ .Values.image.tag }}
+
+replicaCount: {{ .Values.replicaCount }}
+
+ingress:
+  enable: {{ .Values.ingress.enable }}
+  hostUrl: {{ .Values.ingress.hostUrl }}
+
+dbcreds: {{.Values.dbcreds }} {{"password="}}{{.Values.postgresPassword }}

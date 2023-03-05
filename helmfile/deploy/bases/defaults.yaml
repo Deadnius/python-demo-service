@@ -1,0 +1,24 @@
+helmDefaults:
+  kubeContext: {{ .Environment.Name }}
+  ## TODO: create NS and init constraints separately?
+  createNamespace: true
+  ## performs pods restart for the resource if applicable
+  ## TODO: maybe use this flag instead CI_COMMIT_SHA in annotation
+  ##       for updating releases without changes in image tag,
+  ##       need to check behaviour with 'true'
+  recreatePods: {{ env "HELM_RECREATE_PODS" | default false }}
+  ## helm flag --cleanup-on-fail
+  cleanupOnFail: {{ env "HELM_CLEANUP_ON_FAIL" | default false }}
+  ## restores previous state in case of failed release
+  atomic: {{ env "HELM_ATOMIC" | default false }}
+  ## verify the chart before upgrading (only works with packaged charts not directories)
+  verify: {{ env "HELM_VERIFY" | default false }}
+  ## wait for k8s resources via --wait.
+  wait: {{ env "HELM_WAIT" | default false }}
+  ## time in seconds to wait for any individual Kubernetes operation
+  ## (like Jobs for hooks, and waits on pod/pvc/svc/deployment readiness)
+  timeout: {{ env "HELM_TIMEOUT" | default 600 }}
+  ## forces resource update through delete/recreate if needed
+  force: {{ env "HELM_FORCE" | default false }}
+  ## limit the maximum number of revisions saved per release. Use 0 for no limit (default 10)
+  # historyMax: 10

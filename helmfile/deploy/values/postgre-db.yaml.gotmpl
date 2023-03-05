@@ -1,0 +1,11 @@
+#Генерация пароля для юзера postgres
+global:
+  postgresql:
+    auth:
+      postgresPassword: {{ .Values.postgresPassword }}
+
+#Генерация таблицы ip_test c 2 колонками
+primary:
+  initdb:
+    scripts:
+      01-init.sql: {{ toYaml .Values.tablecreate| nindent 8 }}
