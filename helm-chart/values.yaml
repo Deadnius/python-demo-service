@@ -10,3 +10,5 @@ serviceType: ClusterIP
 ingress:
   enable: true
   hostUrl: ipapp.ru
+
+# Values for test
