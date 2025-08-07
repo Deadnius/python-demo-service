@@ -1,7 +1,12 @@
-FROM python:3.10.7-alpine
+FROM python:3.10-slim
+
 WORKDIR /app
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
 COPY . .
-COPY requirments.txt .
-RUN pip install -r requirments.txt
+
 EXPOSE 8000
-ENTRYPOINT [ "python", "./main.py"]
+
+ENTRYPOINT ["python", "./main.py"]
